@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0AFC4820-1B48-4583-874F-21397AA2C3C6}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "OtoDom.Parser", "src\OtoDom.Parser\OtoDom.Parser.fsproj", "{431AC5CB-7FFB-4737-8D2E-ADB262605001}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,5 +18,22 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{431AC5CB-7FFB-4737-8D2E-ADB262605001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{431AC5CB-7FFB-4737-8D2E-ADB262605001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{431AC5CB-7FFB-4737-8D2E-ADB262605001}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{431AC5CB-7FFB-4737-8D2E-ADB262605001}.Debug|x64.Build.0 = Debug|Any CPU
+		{431AC5CB-7FFB-4737-8D2E-ADB262605001}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{431AC5CB-7FFB-4737-8D2E-ADB262605001}.Debug|x86.Build.0 = Debug|Any CPU
+		{431AC5CB-7FFB-4737-8D2E-ADB262605001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{431AC5CB-7FFB-4737-8D2E-ADB262605001}.Release|Any CPU.Build.0 = Release|Any CPU
+		{431AC5CB-7FFB-4737-8D2E-ADB262605001}.Release|x64.ActiveCfg = Release|Any CPU
+		{431AC5CB-7FFB-4737-8D2E-ADB262605001}.Release|x64.Build.0 = Release|Any CPU
+		{431AC5CB-7FFB-4737-8D2E-ADB262605001}.Release|x86.ActiveCfg = Release|Any CPU
+		{431AC5CB-7FFB-4737-8D2E-ADB262605001}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{431AC5CB-7FFB-4737-8D2E-ADB262605001} = {0AFC4820-1B48-4583-874F-21397AA2C3C6}
 	EndGlobalSection
 EndGlobal
