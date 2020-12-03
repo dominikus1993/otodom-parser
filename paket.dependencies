@@ -1,7 +1,7 @@
 source https://api.nuget.org/v3/index.json
 
 storage: none
-framework: net5
+framework: net5.0
 
 nuget Newtonsoft.Json
 nuget FSharp.Plotly

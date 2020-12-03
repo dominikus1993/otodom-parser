@@ -2,7 +2,8 @@
 
 open System
 open FSharp.Data
-open FSharp.Control.AsyncSeq
+open FSharp.Control
+
 
 // Define a function to construct a message to print
 let loadArticles () =
