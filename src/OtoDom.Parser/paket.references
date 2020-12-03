@@ -3,3 +3,4 @@ FSharp.Plotly
 FSharp.Data
 FSharpx.Extras
 Argu
+FSharp.Control.AsyncSeq

@@ -8,3 +8,4 @@ nuget FSharp.Plotly
 nuget FSharp.Data
 nuget FSharpx.Extras
 nuget Argu
+nuget FSharp.Control.AsyncSeq
