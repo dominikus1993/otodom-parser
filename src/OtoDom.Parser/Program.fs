@@ -14,7 +14,9 @@ let loadArticles () =
         let res = document.Descendants["article"]
         
         for node in res do
-            yield {| text = node.InnerText() |}
+            let link = node.Descendants ["a"] |> Seq.choose(fun x -> x.TryGetAttribute("href")) |> Seq.head
+            let price = node.Elements () |> Seq.filter(fun x -> x.HasClass("offer-item-price")) |> Seq.head
+            yield {| text = node.InnerText(); link = link; price = price |}
     }
 
 [<EntryPoint>]
