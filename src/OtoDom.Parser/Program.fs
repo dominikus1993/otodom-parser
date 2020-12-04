@@ -18,6 +18,10 @@ let loadArticles () =
         let res = document.Descendants [ "article" ]
 
         for node in res do
+            let header =
+                node.Descendants()
+                |> Seq.filter (fun x -> x.HasClass("offer-item-header\n"))
+                |> Seq.head
             let link =
                 node.Descendants [ "a" ]
                 |> Seq.choose (fun x -> x.TryGetAttribute("href"))
@@ -28,11 +32,23 @@ let loadArticles () =
                 |> Seq.filter (fun x -> x.HasClass("offer-item-price"))
                 |> Seq.map(fun x -> x.InnerText() |> trim)
                 |> Seq.head
+                
+            let pricePerMeter =
+                node.Descendants()
+                |> Seq.filter (fun x -> x.HasClass("offer-item-price-per-m"))
+                |> Seq.map(fun x -> x.InnerText() |> trim)
+                |> Seq.head
 
+            let area =
+                node.Descendants()
+                |> Seq.filter (fun x -> x.HasClass("offer-item-area"))
+                |> Seq.map(fun x -> x.InnerText() |> trim)
+                |> Seq.head
             yield
-                {| text = node.InnerText()
-                   link = link
-                   price = price |}
+                {| pricePerMeter = pricePerMeter
+                   link = link.Value()
+                   price = price
+                   area = area |}
     }
 
 [<EntryPoint>]
