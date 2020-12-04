@@ -3,9 +3,16 @@ source https://api.nuget.org/v3/index.json
 storage: none
 framework: net5.0
 
+nuget FSharp.Core
 nuget Newtonsoft.Json
 nuget FSharp.Plotly
 nuget FSharp.Data
 nuget FSharpx.Extras
 nuget Argu
 nuget FSharp.Control.AsyncSeq
+
+nuget Microsoft.NET.Test.Sdk
+nuget xunit
+nuget xunit.runner.visualstudio
+nuget coverlet.collector
+nuget FsUnit.xUnit
