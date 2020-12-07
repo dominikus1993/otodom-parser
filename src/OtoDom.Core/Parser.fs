@@ -9,6 +9,7 @@ module private String =
     let split (separator: char) (str: String) = str.Split(separator)
     let trim (str: String) = str.Trim()
     let replace (phrase: String) (replacement: String) (str: String) = str.Replace(phrase, replacement)
+    let hasValue (str) = not(str = null || str = "" || str = " ")
 
 module Parser =
     let private getDistrict (cityName: String) (str: String) =
@@ -43,8 +44,9 @@ module Parser =
 
         detailsNode.InnerText
         |> String.split ('\n')
-        |> Array.map (fun x -> x |> String.trim)
-        |> Array.filter (fun x -> x |> String.IsNullOrEmpty |> not)
+        |> Array.map (String.trim)
+        |> Array.filter (fun x -> x |> String.hasValue)
+        |> Array.map(String.replace (",") (" "))
         |> buildOffer (cityName)
 
     let private getNodeData (cityName: String) (node: HtmlNode) =
@@ -67,9 +69,8 @@ module Parser =
         }
 
     let parse ((url: String, maxPage: int, cityName: String): String * int * String) =
-        [1..maxPage]
-            |> AsyncSeq.ofSeq
-            |> AsyncSeq.map(fun page -> $"{url}&page={page}")
-            |> AsyncSeq.mapAsyncParallel(loadArticles(cityName))
-            |> AsyncSeq.collect(fun x -> x |> AsyncSeq.ofSeq)
-            
+        [ 1 .. maxPage ]
+        |> AsyncSeq.ofSeq
+        |> AsyncSeq.map (fun page -> $"{url}&page={page}")
+        |> AsyncSeq.mapAsyncParallel (loadArticles (cityName))
+        |> AsyncSeq.collect (fun x -> x |> AsyncSeq.ofSeq)
