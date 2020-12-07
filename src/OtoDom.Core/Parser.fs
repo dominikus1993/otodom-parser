@@ -28,7 +28,7 @@ module Parser =
                     Description = desc |> String.trimWord ","
                     District = district  |> String.trimWord "," |> getDistrict (cityName)
                     Rooms = rooms
-                    Price = price |> String.trim
+                    Price = price |> String.replace "," "."
                     PricePerMeter = pricePerMeter |})
         | _ -> None
 
