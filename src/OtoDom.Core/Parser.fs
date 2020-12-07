@@ -14,7 +14,7 @@ module private String =
 module Parser =
     let private getDistrict (cityName: String) (str: String) =
         str
-        |> String.replace $"Mieszkanie na sprzedaż: {cityName}, " ""
+        |> String.replace $"Mieszkanie na sprzedaż: {cityName} " ""
 
     let private buildOffer (cityName: String) (data: string array) =
         match data with

@@ -50,7 +50,7 @@ let getExitCode result =
 [<EntryPoint>]
 let main argv =
     let errorHandler = ProcessExiter(colorizer = function ErrorCode.HelpText -> None | _ -> Some ConsoleColor.Red)
-    let parser = ArgumentParser.Create<CmdArgs>(programName = "rossmann-pep", errorHandler = errorHandler)
+    let parser = ArgumentParser.Create<CmdArgs>(programName ="otodom", errorHandler = errorHandler)
     let res = match parser.ParseCommandLine argv with
               | p when p.Contains(Parse) ->  parse (p.GetResult(Parse))
               | _ ->
