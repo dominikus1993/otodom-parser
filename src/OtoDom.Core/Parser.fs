@@ -24,11 +24,11 @@ module Parser =
         match data with
         | [| _; desc; district; rooms; price; area; pricePerMeter |] ->
             Some
-                ({| Area = area
-                    Description = desc
-                    District = district |> getDistrict (cityName)
+                ({| Area = area |> String.replace "," "."
+                    Description = desc |> String.trimWord ","
+                    District = district  |> String.trimWord "," |> getDistrict (cityName)
                     Rooms = rooms
-                    Price = price
+                    Price = price |> String.trim
                     PricePerMeter = pricePerMeter |})
         | _ -> None
 
@@ -51,11 +51,11 @@ module Parser =
         |> Array.map (String.trim)
         |> Array.filter (fun x -> x |> String.hasValue)
         |> Array.map
-            (String.trimWord ","
-             >> String.trimWord " zł/m²"
+            (String.trimWord " zł/m²"
              >> String.trimWord " zł"
              >> String.trimWord " m²"
-             >> String.trimWord " pokoje")
+             >> String.trimWord " pokoje"
+             >> String.trimWord " pokój")
         |> buildOffer (cityName)
 
     let private getNodeData (cityName: String) (node: HtmlNode) =
