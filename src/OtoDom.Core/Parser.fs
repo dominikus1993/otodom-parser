@@ -4,16 +4,8 @@ open System
 open FSharp.Control
 open FSharpx
 open HtmlAgilityPack
-
-module private String =
-    let split (separator: char) (str: String) = str.Split(separator)
-    let trim (str: String) = str.Trim()
-    let replace (phrase: String) (replacement: String) (str: String) = str.Replace(phrase, replacement)
-
-    let hasValue (str) =
-        not (str = null || str = "" || str = " ")
-
-    let trimWord (phrase: String) (str: String) = str |> replace phrase String.Empty
+open OtoDom.Core.Types
+open OtoDom.Core.Utils
 
 module Parser =
     let private getDistrict (cityName: String) (str: String) =
@@ -64,6 +56,7 @@ module Parser =
 
         details
         |> Option.map (fun det -> {| det with Href = href |})
+        |> Option.map(Offer.create)
 
     let loadArticles (cityName: String) (url: String) =
         async {
