@@ -9,7 +9,11 @@ module private String =
     let split (separator: char) (str: String) = str.Split(separator)
     let trim (str: String) = str.Trim()
     let replace (phrase: String) (replacement: String) (str: String) = str.Replace(phrase, replacement)
-    let hasValue (str) = not(str = null || str = "" || str = " ")
+
+    let hasValue (str) =
+        not (str = null || str = "" || str = " ")
+
+    let trimWord (phrase: String) (str: String) = str |> replace phrase String.Empty
 
 module Parser =
     let private getDistrict (cityName: String) (str: String) =
@@ -46,7 +50,12 @@ module Parser =
         |> String.split ('\n')
         |> Array.map (String.trim)
         |> Array.filter (fun x -> x |> String.hasValue)
-        |> Array.map(String.replace (",") (" "))
+        |> Array.map
+            (String.trimWord ","
+             >> String.trimWord " zł/m²"
+             >> String.trimWord " zł"
+             >> String.trimWord " m²"
+             >> String.trimWord " pokoje")
         |> buildOffer (cityName)
 
     let private getNodeData (cityName: String) (node: HtmlNode) =
