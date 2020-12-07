@@ -3,9 +3,6 @@
 open System
 open System.IO
 open System.Text
-open FSharp.Control
-open FSharp.Data
-open FSharp.Plotly.ChartDescription
 module CsvStorage =
     let FirstRow = "Opis;Dzielnica;Ilość pokoi;Cena;Powierzchnia;Cena za m2;Link do ogłoszenia"
     let store (elements: {| Area: string; Description: string; District: string; Href: string; Price: string; PricePerMeter: string; Rooms: string |} seq) =
