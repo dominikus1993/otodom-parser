@@ -17,17 +17,17 @@ type AppError =
     | ArgumentsNotSpecified of msg: string
 
 type CmdArgs =
-    | [<AltCommandLine("-parse")>] Parse of unit
+    | [<AltCommandLine("-parse")>] Parse of pages: int
 with
     interface IArgParserTemplate with
         member this.Usage =
             match this with
             | Parse _ -> "Parse otodom flats ;) "
 
-let parse () =
+let parse (pages) =
     async {
         let! result = 
-            Parser.parse (OtoDomUrl, 2, City)
+            Parser.parse (OtoDomUrl, pages, City)
                 |> AsyncSeq.toListAsync
     
         do! CsvStorage.store(result)
