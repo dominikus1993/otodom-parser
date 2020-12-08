@@ -8,13 +8,16 @@ open OtoDom.Core.Types
 open OtoDom.Core.Utils
 
 module Parser =
+    
+    let isValidData(data: String seq) =
+        data |> Seq.exists(fun x -> x.Contains("Zapytaj o cenę") || x.Contains("Obsługa zdalna")) |> not
     let private getDistrict (cityName: String) (str: String) =
         str
         |> String.replace $"Mieszkanie na sprzedaż: {cityName} " ""
 
     let private buildOffer (cityName: String) (data: string array) =
         match data with
-        | [| _; desc; district; rooms; price; area; pricePerMeter |] ->
+        | [| _; desc; district; rooms; price; area; pricePerMeter |] when isValidData(data) ->
             Some
                 ({| Area = area |> String.replace "," "."
                     Description = desc |> String.trimWord ","
