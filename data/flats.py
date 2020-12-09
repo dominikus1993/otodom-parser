@@ -1,13 +1,23 @@
 import pandas as pd
 import datetime
+from typing import List
 
-def getCsvFiles(): 
+
+def get_file_names():
     today = datetime.datetime.today().strftime("%Y-%m-%d")
-    dates = pd.date_range(start="2020-12-08",end=today).to_native_types().tolist()
+    dates: list[str] = pd.date_range(start="2020-12-08", end=today).to_native_types().tolist()
     return list(map(lambda d: f'otodom-{d}.csv', dates))
 
-#file = pd.read_csv("./otodom-09-12-2020.csv")
 
-dates = datetimeRange()
+def load_csvs(filenames: List[str]):
+    csvs = []
+    for filename in filenames:
+        df = pd.read_csv(f'./{filename}', index_col=None, header=0)
+        csvs.append(df)
+    return pd.concat(csvs, axis=0, ignore_index=True)
 
-print(dates)
+
+files = get_file_names()
+data = load_csvs(files)
+
+print(data)
