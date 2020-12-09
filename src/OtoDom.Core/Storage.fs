@@ -10,7 +10,7 @@ module CsvStorage =
     let FirstRow = "Opis,Dzielnica,Ilość pokoi,Cena,Powierzchnia,Cena za m2,Data,Link do ogłoszenia"
     
     let private row(elem: Offer) =
-        let date = DateTime.Now.Date.ToString("dd-MM-yyyy")
+        let date = DateTime.Now.Date.ToString("yyyy-MM-dd")
         $"{elem.Description},{elem.District},{elem.Rooms},{elem.Price},{elem.Area},{elem.PricePerMeter},{date},{elem.Href}"
     let private createCsv(elements: Offer seq) =
         let b = StringBuilder() |> StringBuilder.appendLine FirstRow
