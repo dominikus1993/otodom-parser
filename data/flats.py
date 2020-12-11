@@ -1,8 +1,8 @@
 import pandas as pd
 import datetime
 from typing import List
-
-
+pd.set_option('display.max_colwidth', -1)
+pd.set_option("display.max_rows", None, "display.max_columns", None)
 def get_file_names():
     today = datetime.datetime.today().strftime("%Y-%m-%d")
     dates: list[str] = pd.date_range(start="2020-12-10", end=today).to_native_types().tolist()
@@ -23,9 +23,16 @@ def calc_avg_price_per_day(pd):
 def calc_avg_price_per_area(pd):
     return pd.groupby("Powierzchnia", as_index=False)["Cena"].mean()
 
+def get_best_offers(data: pd.DataFrame):
+    today = datetime.datetime.today().strftime("%d-%m-%Y")
+    dt = data.query(f'Data == "{today}"').query("Powierzchnia > 40 & Powierzchnia < 55").query("Cena > 250000 & Cena < 350000")
+    return dt[~dt["Dzielnica"].str.contains("Górna|Widzew|Śródmieście", na=False)].sort_values(by=['Cena'], ascending=False)
+
 files = get_file_names()
 df = load_csvs(files)
-avg_price_per_day = calc_avg_price_per_day(df)
-avg_price_per_area = calc_avg_price_per_area(df)
+
+offers = get_best_offers(df)
+
+avg_price_per_day = calc_avg_price_per_day(offers)
 print(avg_price_per_day)
-print(avg_price_per_area)
+print(offers[:15]["Link do ogłoszenia"])

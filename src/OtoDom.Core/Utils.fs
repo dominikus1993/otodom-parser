@@ -6,10 +6,10 @@ module internal String =
     let split (separator: char) (str: String) = str.Split(separator)
     let trim (str: String) = str.Trim()
     let replace (phrase: String) (replacement: String) (str: String) = str.Replace(phrase, replacement)
-
     let hasValue (str) =
         not (str = null || str = "" || str = " ")
     let trimWord (phrase: String) (str: String) = str |> replace phrase String.Empty
+    let trimSpace (str: String) = str |> trimWord " "
     
 module StringBuilder =
     let appendLine (str: String) (builder: StringBuilder) =

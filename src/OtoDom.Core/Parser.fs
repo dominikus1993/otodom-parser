@@ -14,7 +14,10 @@ module Parser =
     let private getDistrict (cityName: String) (str: String) =
         str
         |> String.replace $"Mieszkanie na sprzedaż: {cityName} " ""
-
+    
+    let private formatPrice p =
+        p |> String.replace "," "." |> String.trimSpace
+        
     let private buildOffer (cityName: String) (data: string array) =
         match data with
         | [| _; desc; district; rooms; price; area; pricePerMeter |] when isValidData(data) ->
@@ -23,8 +26,8 @@ module Parser =
                     Description = desc |> String.trimWord ","
                     District = district  |> String.trimWord "," |> getDistrict (cityName)
                     Rooms = rooms
-                    Price = price |> String.replace "," "."
-                    PricePerMeter = pricePerMeter |})
+                    Price = price |> formatPrice
+                    PricePerMeter = pricePerMeter |> formatPrice |})
         | _ -> None
 
     let private getArticlesNodes (document: HtmlDocument) =
