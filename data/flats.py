@@ -28,6 +28,9 @@ def get_best_offers(data: pd.DataFrame):
     dt = data.query(f'Data == "{today}"').query("Powierzchnia > 40 & Powierzchnia < 55").query("Cena > 250000 & Cena < 350000")
     return dt[~dt["Dzielnica"].str.contains("Górna|Widzew|Śródmieście", na=False)].sort_values(by=['Cena'], ascending=False)
 
+def get_flat_in_specyfic_district(data: pd.DataFrame, district: str):
+    return data[data["Opis"].str.contains(f'{district}|{district.lower()}', na=False)]
+
 files = get_file_names()
 df = load_csvs(files)
 
@@ -36,3 +39,4 @@ offers = get_best_offers(df)
 avg_price_per_day = calc_avg_price_per_day(offers)
 print(avg_price_per_day)
 print(offers[:15]["Link do ogłoszenia"])
+print(get_flat_in_specyfic_district(offers, "Radogoszcz"))
