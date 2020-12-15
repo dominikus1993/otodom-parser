@@ -36,7 +36,7 @@ df = load_csvs(files)
 
 offers = get_best_offers(df)
 
-avg_price_per_day = calc_avg_price_per_day(offers)
+avg_price_per_day = calc_avg_price_per_day(df)
 print(avg_price_per_day)
 print(offers[:15]["Link do ogłoszenia"])
 print(get_flat_in_specyfic_district(offers, "Radogoszcz"))
