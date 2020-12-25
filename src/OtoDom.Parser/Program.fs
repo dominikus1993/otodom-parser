@@ -8,7 +8,7 @@ open OtoDom.Core
 open Argu
 [<Literal>]
 let OtoDomUrl =
-    "https://www.otodom.pl/sprzedaz/mieszkanie/lodz/?search%5Bfilter_float_m%3Afrom%5D=35&search%5Bfilter_float_m%3Ato%5D=55&search%5Bdescription%5D=1&search%5Bregion_id%5D=5&search%5Bsubregion_id%5D=127&search%5Bcity_id%5D=1004"
+    "https://www.otodom.pl/sprzedaz/mieszkanie/lodz/?search%5Bregion_id%5D=5&search%5Bsubregion_id%5D=127&search%5Bcity_id%5D=1004&search%5Border%5D=created_at_first%3Adesc"
 
 [<Literal>]
 let City = "Łódź"
