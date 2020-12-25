@@ -12,8 +12,11 @@ def get_file_names():
 def load_csvs(filenames: List[str]):
     csvs = []
     for filename in filenames:
-        df = pd.read_csv(f'./{filename}', index_col=None, header=0)
-        csvs.append(df)
+        try:
+            df = pd.read_csv(f'./{filename}', index_col=None, header=0)
+            csvs.append(df)
+        except: 
+            print("No file or dir")
     return pd.concat(csvs, axis=0, ignore_index=True)
 
 def calc_avg_price_per_day(pd):
