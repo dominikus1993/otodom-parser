@@ -45,13 +45,10 @@ df = load_csvs(files)
 offers = get_best_offers(df)
 avg_price_per_day = calc_avg_price_per_day(df)
 avg_price_per_meter_per_day = calc_avg_price_per_meter_per_day(df)
-# print(avg_price_per_day)
-# print(avg_price_per_meter_per_day)
-# print(offers[:15]["Link do ogłoszenia"])
-# print(get_flat_in_specyfic_district(offers, "Radogoszcz"))
 
 data_load_state.text('Loading data...done!')
 
-st.write(avg_price_per_day)
 st.line_chart(avg_price_per_day.rename(columns={'Data':'index'}).set_index('index'));
 st.line_chart(avg_price_per_meter_per_day.rename(columns={'Data':'index'}).set_index('index'));
+st.write(offers[:15]["Link do ogłoszenia"])
+st.write(get_flat_in_specyfic_district(offers, "Radogoszcz"))
