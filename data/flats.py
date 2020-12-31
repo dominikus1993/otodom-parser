@@ -31,7 +31,7 @@ def calc_avg_price_per_area(pd):
 
 def get_best_offers(data: pd.DataFrame):
     today = datetime.datetime.today().strftime("%d-%m-%Y")
-    dt = data.query(f'Data == "{today}"').query("Powierzchnia > 40 & Powierzchnia < 60").query("Cena > 250000 & Cena < 400000")
+    dt = data.query(f'Data == "{today}"').query("Powierzchnia > 40 & Powierzchnia < 60").query("Cena > 250000 & Cena < 350000")
     return dt[~dt["Dzielnica"].str.contains("Górna|Widzew|Śródmieście", na=False)].sort_values(by=['Cena'], ascending=False)
 
 def get_flat_in_specyfic_district(data: pd.DataFrame, district: str):
