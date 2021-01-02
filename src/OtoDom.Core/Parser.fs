@@ -36,6 +36,7 @@ module Parser =
     let private getHref (node: HtmlNode) =
         node.Descendants("a")
         |> Seq.map (fun x -> x.GetAttributeValue("href", null))
+        |> Seq.map(fun x -> x |> String.split '#' |> Array.head)
         |> Seq.head
 
     let private getDetails (cityName: String) (node: HtmlNode) =
