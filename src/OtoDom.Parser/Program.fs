@@ -6,6 +6,7 @@ open FSharp.Control
 open HtmlAgilityPack
 open OtoDom.Core
 open Argu
+open Serilog
 [<Literal>]
 let OtoDomUrl =
     "https://www.otodom.pl/sprzedaz/mieszkanie/lodz/?search%5Bregion_id%5D=5&search%5Bsubregion_id%5D=127&search%5Bcity_id%5D=1004&search%5Border%5D=created_at_first%3Adesc"
@@ -24,16 +25,16 @@ with
             match this with
             | Parse _ -> "Parse otodom flats ;) "
 
-let parse (pages) =
+let parse (logger: ILogger) (pages) =
     async {
-        printfn "Start Parsing OtoDom at: %A" DateTime.Now
+        logger.Information("Start Parsing OtoDom at: {Date}", DateTime.Now)
         let! result = 
             Parser.parse (OtoDomUrl, pages, City)
                 |> AsyncSeq.toListAsync
-        printfn "Finish Parsing OtoDom at: %A" DateTime.Now
-        printfn "Start saving data to csv at: %A" DateTime.Now
+        logger.Information("Finish Parsing OtoDom at: {Date}", DateTime.Now)
+        logger.Information("Start Saving OtoDom Data To CSV at: {Date}", DateTime.Now)
         do! CsvStorage.store(result)
-        printfn "Finish saving data to csv at: %A" DateTime.Now
+        logger.Information("Finish Saving OtoDom Data To CSV at: {Date}", DateTime.Now)
         return Ok();
     }
     
@@ -52,10 +53,11 @@ let getExitCode result =
     
 [<EntryPoint>]
 let main argv =
+    let logger = LoggerConfiguration().WriteTo.Console().CreateLogger();
     let errorHandler = ProcessExiter(colorizer = function ErrorCode.HelpText -> None | _ -> Some ConsoleColor.Red)
     let parser = ArgumentParser.Create<CmdArgs>(programName ="otodom", errorHandler = errorHandler)
     let res = match parser.ParseCommandLine argv with
-              | p when p.Contains(Parse) ->  parse (p.GetResult(Parse))
+              | p when p.Contains(Parse) ->  parse logger (p.GetResult(Parse))
               | _ ->
                   async { return Error(ArgumentsNotSpecified(parser.PrintUsage()))  }
               |> getExitCode

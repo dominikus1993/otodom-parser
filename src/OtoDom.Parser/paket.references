@@ -6,3 +6,5 @@ Argu
 FSharp.Control.AsyncSeq
 FSharp.Core
 HtmlAgilityPack
+Serilog
+Serilog.Sinks.Console

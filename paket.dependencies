@@ -4,6 +4,8 @@ storage: none
 framework: net5.0
 
 nuget FSharp.Core
+nuget Serilog
+nuget Serilog.Sinks.Console
 nuget Newtonsoft.Json
 nuget FSharp.Plotly
 nuget FSharp.Data
