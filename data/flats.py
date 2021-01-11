@@ -4,6 +4,8 @@ import streamlit as st
 from typing import List
 pd.set_option('display.max_colwidth', -1)
 pd.set_option("display.max_rows", None, "display.max_columns", None)
+
+dtypes = { 'Opis': 'str', 'Dzielnica': 'str', 'Ilość pokoi': 'int', 'Cena': 'float', 'Powierzchnia': 'float', 'Cena za m2': 'float', 'Data': 'datetime64', 'Link do ogłoszenia': 'str'}
 def get_file_names():
     today = datetime.datetime.today().strftime("%Y-%m-%d")
     dates: list[str] = pd.date_range(start="2020-12-10", end=today).to_native_types().tolist()
@@ -17,7 +19,7 @@ def load_csvs(filenames: List[str]):
             df = pd.read_csv(f'./{filename}', index_col=None, header=0)
             csvs.append(df)
         except: 
-            print("No file or dir")
+            print("No file or dir", filename)
     return pd.concat(csvs, axis=0, ignore_index=True)
 
 def calc_avg_price_per_day(pd):
