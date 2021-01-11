@@ -5,7 +5,7 @@ NUGET
     Argu (6.1.1)
       FSharp.Core (>= 4.3.2)
       System.Configuration.ConfigurationManager (>= 4.4)
-    coverlet.collector (1.3)
+    coverlet.collector (3.0)
     FSharp.Control.AsyncSeq (3.0.3)
       FSharp.Core (>= 4.3.2)
     FSharp.Core (5.0)

@@ -26,19 +26,22 @@ with
 
 let parse (pages) =
     async {
+        printfn "Start Parsing OtoDom at: %A" DateTime.Now
         let! result = 
             Parser.parse (OtoDomUrl, pages, City)
                 |> AsyncSeq.toListAsync
-    
+        printfn "Finish Parsing OtoDom at: %A" DateTime.Now
+        printfn "Start saving data to csv at: %A" DateTime.Now
         do! CsvStorage.store(result)
+        printfn "Finish saving data to csv at: %A" DateTime.Now
         return Ok();
     }
     
 let getExitCode result =
     async {
         match! result with
-        | Ok (res) -> 
-            printfn "%A" res
+        | Ok (_) -> 
+            printfn "Finish %A" DateTime.Now
             return 0
         | Error err ->
             match err with
