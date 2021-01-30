@@ -9,7 +9,7 @@ dates = ["Data"]
 dtypes = { 'Opis': 'str', 'Dzielnica': 'str', 'Ilość pokoi': 'str', 'Cena': 'float', 'Powierzchnia': 'float', 'Cena za m2': 'float', 'Data': 'str', 'Link do ogłoszenia': 'str'}
 def get_file_names():
     today = datetime.datetime.today().strftime("%Y-%m-%d")
-    dates: list[str] = pd.date_range(start="2020-12-10", end=today).to_native_types().tolist()
+    dates: list[str] = pd.date_range(start="2021-01-30", end=today).to_native_types().tolist()
     return list(map(lambda d: f'otodom-{d}.csv', dates))
 
 
