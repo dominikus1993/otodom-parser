@@ -5,6 +5,7 @@ from typing import List
 pd.set_option('display.max_colwidth', -1)
 pd.set_option("display.max_rows", None, "display.max_columns", None)
 dates = ["Data"]
+mydateparser = lambda x: pd.datetime.strptime(x, "%d-%m-%Y")
 
 dtypes = { 'Opis': 'str', 'Dzielnica': 'str', 'Ilość pokoi': 'str', 'Cena': 'float', 'Powierzchnia': 'float', 'Cena za m2': 'float', 'Data': 'str', 'Link do ogłoszenia': 'str'}
 def get_file_names():
