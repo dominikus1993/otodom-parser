@@ -12,10 +12,7 @@ module CsvStorage =
 
     let private row (elem: Offer) =
         let date = DateTime.Now.Date.ToString("dd-MM-yyyy")
-
-        $"{elem.Description},{elem.District},{elem.Rooms},{elem.Price},{elem.Area},{elem.PricePerMeter},{date},{
-                                                                                                                    elem.Href
-        }"
+        $"{elem.Description},{elem.District},{elem.Rooms},{elem.Price},{elem.Area},{elem.PricePerMeter},{date},{elem.Href}"
 
     let private createCsv (elements: Offer seq) =
         let b =
