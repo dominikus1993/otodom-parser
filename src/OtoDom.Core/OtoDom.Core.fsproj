@@ -10,6 +10,7 @@
     <Content Include="paket.references" />
     <Compile Include="Parser.fs" />
     <Compile Include="Storage.fs" />
+    <Compile Include="Processor.fs" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>
