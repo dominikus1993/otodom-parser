@@ -11,8 +11,13 @@ module internal String =
     let trimWord (phrase: String) (str: String) = str |> replace phrase String.Empty
     let trimSpace (str: String) = str |> trimWord " "
     
-module StringBuilder =
+module internal StringBuilder =
     let appendLine (str: String) (builder: StringBuilder) =
         builder.AppendLine(str)
         
     let toString (builder: StringBuilder) = builder.ToString()
+    
+module CsvHelper =
+    let parseInt = function "" -> 0 | str -> int str
+    let parseFloat = function "" -> 0 | str -> int str
+    
