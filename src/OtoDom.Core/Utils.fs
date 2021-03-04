@@ -1,7 +1,7 @@
 ﻿namespace OtoDom.Core.Utils
 open System
+open System.Globalization
 open System.Text
-open OtoDom.Core.Utils
 
 module internal String =
     let split (separator: char) (str: String) = str.Split(separator)
@@ -21,9 +21,11 @@ module internal StringBuilder =
 
 module Convert =
     let toDouble(str: String) =
-        Double.Parse(str)
+        Double.Parse(str, CultureInfo.InvariantCulture)
     
-    let 
+    let toDateTime str =
+        DateTime.Parse(str, CultureInfo.CurrentCulture)
+        
 module CsvHelper =
     let parseInt = function "" -> 0 | str -> int str
     let parseFloat = function "" -> 0 | str -> int str

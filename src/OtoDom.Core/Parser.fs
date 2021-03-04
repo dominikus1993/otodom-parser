@@ -1,4 +1,4 @@
-﻿//namespace OtoDom.Core
+﻿namespace OtoDom.Core
 //
 //open System
 //open FSharp.Control

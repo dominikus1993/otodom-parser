@@ -5,8 +5,8 @@
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Types.fs" />
     <Compile Include="Utils.fs" />
+    <Compile Include="Types.fs" />
     <Content Include="paket.references" />
     <Compile Include="Parser.fs" />
     <Compile Include="Storage.fs" />
