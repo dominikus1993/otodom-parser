@@ -1,6 +1,7 @@
 ﻿namespace OtoDom.Core.Utils
 open System
 open System.Text
+open OtoDom.Core.Utils
 
 module internal String =
     let split (separator: char) (str: String) = str.Split(separator)
@@ -16,7 +17,13 @@ module internal StringBuilder =
         builder.AppendLine(str)
         
     let toString (builder: StringBuilder) = builder.ToString()
+
+
+module Convert =
+    let toDouble(str: String) =
+        Double.Parse(str)
     
+    let 
 module CsvHelper =
     let parseInt = function "" -> 0 | str -> int str
     let parseFloat = function "" -> 0 | str -> int str
