@@ -1,6 +1,7 @@
 ﻿namespace OtoDom.Core.Types
 
 open System
+open FSharp.Data
 open FSharp.Plotly.ChartDescription
 
 type Offer =
@@ -27,3 +28,12 @@ module Offer =
           Price = offer.Price
           PricePerMeter = offer.PricePerMeter
           Rooms = offer.Rooms }
+
+    let fromCsvRow (row: CsvRow): Offer =
+        { Description = row.["Opis"]
+          District = row.["Dzielnica"]
+          Area = row.["Ilość pokoi"]
+          Href = row.["Link do ogłoszenia"]
+          Price = row.["Cena"]
+          PricePerMeter = row.["Cena za m2"]
+          Rooms = row.["Ilość pokoi"] }
