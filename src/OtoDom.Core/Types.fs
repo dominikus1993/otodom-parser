@@ -2,7 +2,6 @@
 
 open System
 open FSharp.Data
-open FSharp.Plotly.ChartDescription
 open OtoDom.Core.Utils
 
 type Offer =
