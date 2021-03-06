@@ -5,5 +5,5 @@ from model import Offer
 class Parser(ABC):
 
     @abstractmethod
-    async def parse(self, url: str, city: str) -> List[Offer]:
+    def parse(self, url: str, city: str) -> List[Offer]:
         pass
