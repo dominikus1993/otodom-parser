@@ -1,8 +1,9 @@
 import asyncio
+from infrastructure import FakeParser
 
-from usecases import load_offers
+from usecases import GetOffersUseCase
 
 
-a = asyncio.run(load_offers("", "", 1))
+a = asyncio.run(GetOffersUseCase(FakeParser()).load_offers("", "", 1))
 
 print(a)

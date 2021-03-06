@@ -8,14 +8,14 @@ from model import Offer
 
 class GetOffersUseCase:
 
-    offerParser: Parser
+    __offerParser: Parser
 
     def __init__(self, parser: Parser) -> None:
         self.offerParser = parser
 
     
     async def __load_offer(self, url: str, cityName: str) -> List[Offer]:
-
+        
         return []
 
     async def load_offers(self, url: str, cityName: str, pages: int) -> List[Offer]: 
