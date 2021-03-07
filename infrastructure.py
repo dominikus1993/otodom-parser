@@ -14,7 +14,7 @@ class HtmlParser(Parser):
         self.__logger = logger
 
     def parse(self, url: str, city: str) -> List[Offer]:
-        self.__logger.debug(f'Start Parsing', extra={"url": url, "process": multiprocessing.current_process()})
+        self.__logger.debug('Start Parsing', extra={"url": url, "process_id": multiprocessing.current_process()})
         html = requests.get(url);
         soup = BeautifulSoup(html.content, "html.parser")
         offers = soup.find_all('article')

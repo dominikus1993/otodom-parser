@@ -25,6 +25,6 @@ class GetOffersUseCase:
             self.__logger.info("Start parsing offers") 
             w = p.starmap_async(self.__offerParser.parse, map(lambda url: (url, cityName), pages_urls))
             w.wait() 
-            offers = list(itertools.chain(*w.get()));
+            offers = list(itertools.chain(*w.get()))
             self.__logger.info("Offers parsed")   
             return list(itertools.chain(*w.get()))
