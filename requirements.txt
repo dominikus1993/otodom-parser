@@ -1,0 +1,4 @@
+beautifulsoup4==4.9.3
+soupsieve==2.2
+requests==2.25.1
+python-json-logger==2.0.1 
