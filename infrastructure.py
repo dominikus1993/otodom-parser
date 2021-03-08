@@ -3,7 +3,7 @@ import logging
 import multiprocessing
 from utils import format_price
 from model import Offer
-from typing import Any, Iterator, List, Sequence
+from typing import Any, List
 from services import OffersStorage, Parser
 from bs4 import BeautifulSoup
 import requests
