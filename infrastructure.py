@@ -1,12 +1,14 @@
 import datetime
 import logging
 import multiprocessing
+from os import write
 from utils import format_price
 from model import Offer
 from typing import Any, List
 from services import OffersStorage, Parser
 from bs4 import BeautifulSoup
 import requests
+import csv
 
 def trim_word(txt: str, word: str) -> str: 
     return txt.replace(word, "")
@@ -18,9 +20,7 @@ class HtmlParser(Parser):
         self.__logger = logger
         
     def __get_href(self, offer: Any) -> str:
-        href = offer.find('a').attrs['href']
-        print(href)
-        return href
+        return offer.find('a').attrs['href']
 
     def __clean_offer(self, txt: str) -> str:
         data = str(txt).strip()
@@ -36,7 +36,7 @@ class HtmlParser(Parser):
 
     def parse(self, url: str, city: str) -> List[Offer]:
         self.__logger.debug('Start Parsing', extra={"url": url, "process_id": multiprocessing.current_process()})
-        html = requests.get(url);
+        html = requests.get(url)
         soup = BeautifulSoup(html.content, "html.parser")
         offers = soup.find_all('article')
         result = []
@@ -45,15 +45,23 @@ class HtmlParser(Parser):
             href = self.__get_href(offer)
             data = [self.__clean_offer(e) for e in details.text.split('\n') if e and e.strip()]
             if self.__is_valid_offer(data):
-                result.append(Offer(format_price(data[0]), data[1], data[2], href, format_price(data[4]), format_price(data[6]), data[3], datetime.date(2008, 6, 24)))
+                result.append(Offer(format_price(data[0]), data[1], data[2], href, format_price(data[4]), format_price(data[6]), data[3], datetime.date.today()))
         return result
 
 
 class FakeStorage(OffersStorage):
     __logger: logging.Logger
+    __path: str
 
-    def __init__(self, logger: logging.Logger) -> None:
+    def __init__(self, path: str, logger: logging.Logger) -> None:
         self.__logger = logger
+        self.__path = path
 
     def save(self, offers: List[Offer]):
-        self.__logger.info("Saved")
+        colums = ["Opis","Dzielnica","Ilość pokoi","Cena","Powierzchnia","Cena za m2","Data","Link do ogłoszenia"]
+        data = list(map(lambda x: x.format_csv(),  offers))
+        with open(self.__path, "w") as f:
+            write = csv.writer(f)
+            write.writerow(colums)
+            write.writerows(data)
+            self.__logger.info("Saved")
