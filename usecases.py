@@ -19,7 +19,7 @@ class GetOffersUseCase:
         self.__logger = logger
 
 
-    def load_offers(self, url: str, cityName: str, pages: int) -> List[Offer]: 
+    def load_offers(self, url: str, cityName: str, pages: int) -> None: 
         pages_urls = generate_pages_urls(url, pages)
         with Pool(5) as p:
             self.__logger.info("Start parsing offers") 
@@ -27,4 +27,5 @@ class GetOffersUseCase:
             w.wait() 
             offers = list(itertools.chain(*w.get()))
             self.__logger.info("Offers parsed")   
-            return list(itertools.chain(*w.get()))
+            self.__storage.save(offers=offers)
+            self.__logger.info("Offers saved")  

@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List, Union
+from typing import Iterator, List, Union
 from model import Offer
 
 class Parser(ABC):
