@@ -1,8 +1,6 @@
-import datetime
+import multiprocessing
 from services import Parser, OffersStorage
-from typing import List
 from utils import generate_pages_urls
-from model import Offer
 from multiprocessing import Pool
 import itertools
 import logging
@@ -21,7 +19,9 @@ class GetOffersUseCase:
 
     def load_offers(self, url: str, cityName: str, pages: int) -> None: 
         pages_urls = generate_pages_urls(url, pages)
-        with Pool(5) as p:
+        process_count = multiprocessing.cpu_count()
+        self.__logger.debug("Start parsing offers with process", extra={"process_count": process_count}) 
+        with Pool(process_count) as p:
             self.__logger.info("Start parsing offers") 
             w = p.starmap_async(self.__offerParser.parse, map(lambda url: (url, cityName), pages_urls))
             w.wait() 

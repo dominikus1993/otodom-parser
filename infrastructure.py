@@ -2,7 +2,7 @@ import datetime
 import logging
 import multiprocessing
 from os import write
-from utils import format_price
+from utils import format_price, get_district_name
 from model import Offer
 from typing import Any, List
 from services import OffersStorage, Parser
@@ -12,6 +12,7 @@ import csv
 
 def trim_word(txt: str, word: str) -> str: 
     return txt.replace(word, "")
+
 
 class HtmlParser(Parser):
     __logger: logging.Logger
@@ -45,7 +46,7 @@ class HtmlParser(Parser):
             href = self.__get_href(offer)
             data = [self.__clean_offer(e) for e in details.text.split('\n') if e and e.strip()]
             if self.__is_valid_offer(data):
-                result.append(Offer(format_price(data[0]), data[1], data[2], href, format_price(data[4]), format_price(data[6]), data[3], datetime.date.today()))
+                result.append(Offer(format_price(data[0]), data[1], get_district_name(data[2], city), href, format_price(data[4]), format_price(data[6]), data[3], datetime.date.today()))
         return result
 
 
