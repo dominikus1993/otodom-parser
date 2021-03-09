@@ -11,8 +11,8 @@ def calc_avg_price_per_area(data):
     return data.groupby("Powierzchnia", as_index=False)["Cena"].mean()
 
 
-def get_best_offers(data: pd.DataFrame):
-    today = datetime.datetime.today()
+def get_best_offers(data):
+    today = datetime.date.today()
     dt = data.query(f'Data == "{today}"').query("Powierzchnia > 40 & Powierzchnia < 60").query("Cena > 250000 & Cena < 350000")
     return dt[~dt["Dzielnica"].str.contains("Górna|Widzew|Śródmieście", na=False)].sort_values(by=['Cena'], ascending=False)
 
