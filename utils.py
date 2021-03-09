@@ -1,4 +1,4 @@
-from typing import List
+from typing import Any, List
 import datetime
 import pandas as pd
 
@@ -16,7 +16,19 @@ def get_district_name(district: str, city_name: str) -> str:
 def generate_pages_urls(url: str, maxPage: int) -> List[str]:
     return list(map(lambda page: f'{url}&page={page}',range(0, maxPage + 1)))
 
+def load_csvs(paths: List[str]) -> Any:
+    dtypes = { 'Opis': 'str', 'Dzielnica': 'str', 'Ilość pokoi': 'str', 'Cena': 'float', 'Powierzchnia': 'float', 'Cena za m2': 'float', 'Data': 'str', 'Link do ogłoszenia': 'str'}
+    csvs = []
+    for path in paths:
+        try:
+            df = pd.read_csv(path, index_col=None, header=0, dtype= dtypes)
+            csvs.append(df)
+        except:
+            print("Error", path)
+
+    return pd.concat(csvs, axis=0, ignore_index=True)
+
 def get_file_names():
     today = datetime.datetime.today()
     dates: list[str] = pd.date_range(start="2021-03-09", end=today).to_native_types().tolist()
-    return list(map(lambda d: f'otodom-{d}.csv', dates))
+    return list(map(lambda d: f'./data/otodom-{d}.csv', dates))
