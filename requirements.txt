@@ -3,3 +3,6 @@ soupsieve==2.2
 requests==2.25.1
 python-json-logger==2.0.1 
 pandas==1.2.3
+plotly==4.14.3
+notebook==6.2.0
+ipywidgets==7.6.3 
