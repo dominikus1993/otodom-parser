@@ -8,7 +8,7 @@ def calc_avg_price_per_meter_per_day(data):
     return data.groupby("Data", as_index=False)["Cena za m2"].mean()
 
 def calc_avg_price_per_area(data):
-    return data.groupby("Powierzchnia", as_index=False)["Cena"].mean()
+    return data.query("Powierzchnia > 40 & Powierzchnia < 60").groupby("Powierzchnia", as_index=False)["Cena"].mean()
 
 
 def get_best_offers(data):

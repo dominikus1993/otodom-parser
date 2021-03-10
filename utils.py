@@ -30,5 +30,5 @@ def load_csvs(paths: List[str]) -> Any:
 
 def get_file_names():
     today = datetime.datetime.today()
-    dates: list[str] = pd.date_range(start="2021-03-09", end=today).to_native_types().tolist()
+    dates: list[str] = pd.date_range(start="2021-03-09", end=today).astype(str).tolist()
     return list(map(lambda d: f'./data/otodom-{d}.csv', dates))
