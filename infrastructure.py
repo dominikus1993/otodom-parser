@@ -50,7 +50,7 @@ class HtmlParser(Parser):
         return result
 
 
-class FakeStorage(OffersStorage):
+class CsvStorage(OffersStorage):
     __logger: logging.Logger
     __path: str
 
