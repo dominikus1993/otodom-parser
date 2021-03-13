@@ -36,6 +36,6 @@ def get_file_names():
     return list(map(lambda d: f'./data/otodom-{d}.csv', dates))
 
 
-T = TypeVar('T');
+T = TypeVar('T')
 def distinct_by(sequence: Iterable[T], func: Callable[[T], Any]) -> List[T]:
     return list([list(v)[0] for _, v in groupby(sequence, func)])

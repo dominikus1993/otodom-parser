@@ -27,7 +27,7 @@ class GetOffersUseCase:
             w = p.starmap_async(self.__offerParser.parse, map(lambda url: (url, cityName), pages_urls))
             w.wait() 
             offers = chain(*w.get())
-            result = distinct_by(offers, lambda x: x.href);
+            result = distinct_by(offers, lambda x: x.href)
             self.__logger.info("Offers parsed")   
             self.__storage.save(offers=result)
             self.__logger.info("Offers saved")  
