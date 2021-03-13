@@ -21,7 +21,8 @@ class HtmlParser(Parser):
         self.__logger = logger
         
     def __get_href(self, offer: Any) -> str:
-        return offer.find('a').attrs['href']
+        href: str = offer.find('a').attrs['href']
+        return href.split("#")[0]
 
     def __clean_offer(self, txt: str) -> str:
         data = str(txt).strip()

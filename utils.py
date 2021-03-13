@@ -1,6 +1,8 @@
-from typing import Any, List
+from typing import Any, Callable, Iterable, List
 import datetime
 import pandas as pd
+from typing import TypeVar
+from itertools import groupby
 
 def format_price(price: str) -> float:
     result = price.replace(",", ".").replace(" ", "")
@@ -32,3 +34,8 @@ def get_file_names():
     today = datetime.datetime.today()
     dates: list[str] = pd.date_range(start="2021-03-09", end=today).astype(str).tolist()
     return list(map(lambda d: f'./data/otodom-{d}.csv', dates))
+
+
+T = TypeVar('T');
+def distinct_by(sequence: Iterable[T], func: Callable[[T], Any]) -> List[T]:
+    return list([list(v)[0] for _, v in groupby(sequence, func)])
