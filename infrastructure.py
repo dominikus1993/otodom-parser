@@ -22,7 +22,7 @@ class HtmlParser(Parser):
         
     def __get_href(self, offer: Any) -> str:
         href: str = offer.find('a').attrs['href']
-        return href.split("#")[0]
+        return href.split("#")[0].strip()
 
     def __clean_offer(self, txt: str) -> str:
         data = str(txt).strip()

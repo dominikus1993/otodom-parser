@@ -24,9 +24,8 @@ class GetOffersUseCase:
         self.__logger.debug("Start parsing offers with process", extra={"process_count": process_count}) 
         with Pool(process_count) as p:
             self.__logger.info("Start parsing offers") 
-            w = p.starmap_async(self.__offerParser.parse, map(lambda url: (url, cityName), pages_urls))
-            w.wait() 
-            offers = chain(*w.get())
+            w = p.starmap(self.__offerParser.parse, map(lambda url: (url, cityName), pages_urls))
+            offers = chain(*w)
             result = distinct_by(offers, lambda x: x.href)
             self.__logger.info("Offers parsed")   
             self.__storage.save(offers=result)
