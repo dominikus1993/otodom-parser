@@ -1,10 +1,8 @@
-from model import Offer
 import multiprocessing
-from typing import Iterable, List
 from services import Parser, OffersStorage
 from utils import distinct_by, generate_pages_urls
 from multiprocessing import Pool
-from itertools import chain, groupby
+from itertools import chain
 import logging
 
 class GetOffersUseCase:
