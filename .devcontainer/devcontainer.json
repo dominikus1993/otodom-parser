@@ -34,7 +34,8 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"ms-python.python",
-		"visualstudioexptteam.vscodeintellicode"
+		"visualstudioexptteam.vscodeintellicode",
+		"wakatime.vscode-wakatime"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
