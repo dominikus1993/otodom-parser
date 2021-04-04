@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 import requests
 import csv
 
-def __trim_word(txt: str, word: str) -> str: 
+def trim_word(txt: str, word: str) -> str: 
     return txt.replace(word, "")
 
 
@@ -26,11 +26,11 @@ class HtmlParser(Parser):
 
     def __clean_offer(self, txt: str) -> str:
         data = str(txt).strip()
-        data = __trim_word(data, " zł/m²")
-        data = __trim_word(data, " zł")
-        data = __trim_word(data, " m²")
-        data = __trim_word(data, " pokoje")
-        data = __trim_word(data, " pokój")
+        data = trim_word(data, " zł/m²")
+        data = trim_word(data, " zł")
+        data = trim_word(data, " m²")
+        data = trim_word(data, " pokoje")
+        data = trim_word(data, " pokój")
         return data
     
     def __is_valid_offer(self, offer: List[str]): 
