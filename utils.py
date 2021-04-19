@@ -1,8 +1,9 @@
-from typing import Any, Callable, Iterable, List
+from typing import Any, Callable, Iterable, List, Set
 import datetime
 import pandas as pd
 from typing import TypeVar
 from itertools import groupby
+import collections
 
 def format_price(price: str) -> float:
     result = price.replace(",", ".").replace(" ", "")
@@ -38,4 +39,10 @@ def get_file_names():
 
 T = TypeVar('T')
 def distinct_by(sequence: Iterable[T], func: Callable[[T], Any]) -> List[T]:
-    return list([list(v)[0] for _, v in groupby(sequence, func)])
+    result = collections.OrderedDict()
+    for el in sequence:
+        key = func(el)
+        if key not in result:
+            result[key] = el
+    return list(result.values())
+

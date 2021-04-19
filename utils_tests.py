@@ -24,5 +24,15 @@ class TestProjectEuler(unittest.TestCase):
         self.assertEqual(len(subject), 2)
         self.assertEqual(subject, [offer1, offer2])
 
+
+    def test_distinct_by_field_when_offers_has_duplicates(self):
+        offer1 = Offer(1, "", "", "a", 12, 1221, "", datetime.datetime.today())
+        offer2 = Offer(1, "", "", "b", 12, 1221, "", datetime.datetime.today())
+        offer3 = Offer(1, "", "", "https://www.otodom.pl/pl/oferta/przytulne-m-3-na-dabrowie-ID4b6cA.html", 12, 1221, "", datetime.datetime.today())
+        offer4 = Offer(1, "", "", "https://www.otodom.pl/pl/oferta/przytulne-m-3-na-dabrowie-ID4b6cA.html", 12, 1221, "", datetime.datetime.today())
+        subject = distinct_by([offer1, offer2, offer3, offer4], lambda x: x.href)
+        self.assertEqual(len(subject), 3)
+        self.assertEqual(subject, [offer1, offer2, offer3])
+
 if __name__ == '__main__':
     unittest.main()

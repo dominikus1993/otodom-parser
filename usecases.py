@@ -23,7 +23,7 @@ class GetOffersUseCase:
         with Pool(process_count) as p:
             self.__logger.info("Start parsing offers") 
             w = p.starmap(self.__offerParser.parse, map(lambda url: (url, cityName), pages_urls))
-            offers = chain(*w)
+            offers = list(chain(*w))
             result = distinct_by(offers, lambda x: x.href)
             self.__logger.info("Offers parsed")   
             self.__storage.save(offers=result)
