@@ -11,7 +11,7 @@ parser = HtmlParser(logger)
 storage = CsvStorage(f'./data/{get_csv_filename()}', logger)
 usecase = GetOffersUseCase(parser, storage, logger)
 
-usecase.load_offers(OTODOM_URL, "Łódź", 90)
+usecase.load_offers(OTODOM_URL, "Łódź", 56)
 
 
 logger.info("Finish")
